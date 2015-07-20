@@ -1,0 +1,6 @@
+# hiera/common.yaml
+---
+#consul::join_cluster: "172.20.33.10"
+#join_addr: "172.20.33.10"
+consul::join_cluster: "192.168.22.200"
+join_addr: "192.168.22.200"

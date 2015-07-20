@@ -1,0 +1,121 @@
+### MASTER
+
+This is API breaking update! Please consult readme & adjust your configs!
+
+* [MISC] alot of refactoring, thanks to decibelhertz @ github
+* [SYNTAX] paramtag is now tag
+* [SYNTAX] paramset is now set
+* [SYNTAX] ::dhcpoption now uses 'option' variable instead of 'name' for option
+* [FEATURE] ::dnsserver now supports 'port' variable
+* [FEATURE] domain variable can now be passed as array for multiple domains
+* [FEATURE] no_resolv parameter in dnsmasq class
+* [FEATURE] dhcp_leasefile parameter in dnsmasq class
+* [FEATURE] dns_forward_max variable in dnsmasq class
+* [FEATURE] ::dhcp now supports mode => setting
+* [FIX] proper license name
+
+### 2.6.1
+
+* [DOCS] Add info about new ::dnsserver
+
+### 2.6.0
+This version's contibutors: bwalex @ github and funnymanva @ github.
+
+* [FEATURE] add hook for resolvconf -u
+* [FEATURE] dragonfly BSD support
+* [FEATURE] dns-rr records support
+* [FEATURE] add support for authoritative mode
+* [FEATURE] support updating dnsmasq config without service restart
+
+### 2.5.0
+(NB: If you use dnsmasq::dnsserver class, read that changelog!)
+Thanks to Axel Bock ( flypenguin @ github ) for most of changes in this patch.
+
+* [API] dnsmasq::dnsserver now require $domain variable for queueing subdomains
+* [FEATURE] dnsmasq::dnsserver can now be used without domain (by default)
+* [FEATURE] Ability to configure dnsmasq completely using a config_hash option
+* [FEATURE] Save original config before replacing it with puppet-generated
+* [FEATURE] Use a generic service name
+* [FEATURE] Make service state configurable
+* [FEATURE] Confdir is now optional
+* [FEATURE] Most of variables in dnsserver::mx is now optional
+* [FEATURE] Validate IP using stdlib
+* [FIX] concat::setup call removed since it deprecated
+* [FIX] Updated dependencies
+
+### 2.4.0
+
+Thanks to guimaluf @ github for that fixes/additions
+
+* [FEATURE] dnsmasq::dhcpboot with less required parameters
+* [FEATURE] dnsmasq::dhcpoption now supports dnsmasq tags
+
+### 2.3.0
+
+Thanks to Thomas Bétrancourt (rclsilver @ github) for that fixes/additions
+
+* [FEATURE] dnsmasq 'server' option
+* [FEATURE] dhcp-no-override parameter
+* [FEATURE] no-dhcp-interface parameter
+* [MISC] more readable template
+* [FEATURE] notify dnsmasq service if $no_hosts parameter is false and when host entries are created
+
+### 2.2.0
+
+* [FEATURE] PTR records
+* [FEATURE] TXT records
+* [BUGFIX] proper variable calling in all templates
+* [BUGFIX] fedora support fix
+
+
+### 2.1.0
+
+* [FEATURE] "cname" (sorta) records support
+* [FEATURE] srv records support
+* [FEATURE] mx records support
+* [MISC] cosmetic changes in header of dnsmasq.conf, no more ugly newlines
+* [BUGFIX] concat ordering fixed
+
+### 2.0.0
+(Please note: this release brings loads of changes and can break existing configs)
+
+* [FEATURE] array can be used in 'interface =>' to specify several listen interfaces
+* [FEATURE] listen_address added to specify IP instead of interfaces
+* [FEATURE] array can be used in 'listen_address =>' to specify several listening IPs
+* [FEATURE] dnsmasq::dhcpboot added to customize PXE booting for specific hosts/subnets
+* [FEATURE] interface, listen_address and domain is now optional, undefined by default
+* [FEATURE] dnsmasq::domain added to specify domain name for different subnets
+* [FEATURE] tag and set options added to dnsmasq::dhcp and dnsmasq::dhcpboot
+* [BUGFIX] several DHCP instances can be added now
+* [BUGFIX] added forgotten concat dependency
+* [BUGFIX] conf.d dir can now be used with system default
+* [BUGFIX] Default dnsmasq conf.d directory can now be used on RHEL-based distros
+
+### 1.1.2
+
+* [FEATURE] DHCP server now supports netmask
+* [API] dnsmasq::dhcp now requires netmask, check readme
+
+### 1.1.1
+
+* [FEATURE] Add resolv-file option
+* [FEATURE] Add cache-size option
+* [FEATURE] Add no-hosts option
+* [FEATURE] Add dnsmasq.d config folder support
+* [BUG] Wrong name in puppetforge modulefile
+
+### 1.1.0
+
+* [API] dnsmasq::dhcpstatic now uses $ip instead of $macip, update your configs
+* [MISC] Fixed all style-errors in manifests
+* [MISC] More adequate templates names
+* [MISC] Warning about puppet management on top of dnsmasq.conf
+* [FEATURE] Error message about unsupported systems
+
+### 1.0.1
+
+* [BUG] Hotfix for documentation, wrong class name in ::staticdhcp
+
+### 1.0.0
+
+* [INFO] Initial release

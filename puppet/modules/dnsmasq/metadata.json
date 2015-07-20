@@ -1,0 +1,48 @@
+{
+  "name": "lex-dnsmasq",
+  "version": "2.6.1",
+  "author": "Lex Rivera <me@lex.io>",
+  "license": "CC-BY-4.0",
+  "summary": "Puppet dnsmasq management module",
+  "source": "https://github.com/rlex/puppet-dnsmasq",
+  "project_page": "(https://forge.puppetlabs.com/lex/dnsmasq)",
+  "issues_url": "https://github.com/rlex/puppet-dnsmasq/issues",
+  "tags": ["dns", "dhcp", "dnsmasq", "ubuntu", "debian", "ipv4", "ipv6", "redhat", "freebsd", "centos", "rhel"],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat"
+    },
+    {
+      "operatingsystem": "CentOS"
+    },
+    {
+      "operatingsystem": "OracleLinux"
+    },
+    {
+      "operatingsystem": "Debian"
+    },
+    {
+      "operatingsystem": "Ubuntu"
+    },
+    {
+      "operatingsystem": "DragonFly"
+    },
+    {
+      "operatingsystem": "FreeBSD"
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.2.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 3.2.0" },
+    { "name": "puppetlabs/concat", "version_requirement": ">= 1.0.0" }
+  ]
+}
