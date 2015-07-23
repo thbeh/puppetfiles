@@ -11,7 +11,7 @@ file { '/bin/test':
 node default {
 
 	class { 'resolvconf':
-		nameservers => ['127.0.0.1','192.168.20.1']
+		nameservers => ['127.0.0.1','192.168.20.1'],
 	}
 	
 #	class { 'consul_client': 
