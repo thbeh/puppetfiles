@@ -3,6 +3,9 @@ Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
 
 
 node default {
+	class { 'resolvconf':
+		nameservers => ['127.0.0.1','192.168.20.1']
+	}
 
 	class { 'consul': 
 		# join_cluster => '172.20.20.10',
