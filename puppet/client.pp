@@ -10,7 +10,7 @@ file { '/bin/test':
 
 node default {
 
-	class { 'resolvconf':
+	class { 'resolv_conf':
 		nameservers => ['127.0.0.1','192.168.20.1'],
 	}
 	

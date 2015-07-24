@@ -3,7 +3,7 @@ Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
 
 
 node default {
-	class { 'resolvconf':
+	class { 'resolv_conf':
 		nameservers => ['127.0.0.1','192.168.20.1'],
 	}
 
