@@ -1,6 +1,5 @@
 Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
-
-
+include ntp
 
 node default {
 	class { 'resolv_conf':
@@ -41,6 +40,17 @@ node default {
 		ip     => "127.0.0.1",
 		port   => "8600",
 	}
+
+	class { 'ambari_server':
+		repo => "http://public-repo-1.hortonworks.com/ambari/centos6/1.x/updates/1.7.0/ambari.repo",
+	}
+
+	class { 'ambari_agent':
+		repo => "http://public-repo-1.hortonworks.com/ambari/centos6/1.x/updates/1.7.0/ambari.repo",
+                serverhostname => $::hostname,
+	}
+
+	
 }
 
 if $::puppetversion >= '3.6.1' {
