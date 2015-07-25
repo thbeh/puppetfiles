@@ -2,6 +2,11 @@ Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
 include ntp
 
 node default {
+
+	host { $::hostname:
+		ip => $::ipaddress_eth1,
+	}
+
 	class { 'resolv_conf':
 		nameservers => ['127.0.0.1','192.168.20.1'],
 	}
