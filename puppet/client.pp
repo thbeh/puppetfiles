@@ -52,7 +52,7 @@ class { 'consul':
 
 class { 'ambari_agent':
         repo => "http://public-repo-1.hortonworks.com/ambari/centos6/1.x/updates/1.7.0/ambari.repo",
-        serverhostname => $::hostname,
+        serverhostname => [hiera('server_ip')],
 }
 
 Class['dnsmasq'] -> Class['ntp'] -> Class['resolv_conf'] -> Class['consul'] -> Class['ambari_agent']
