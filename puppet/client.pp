@@ -1,4 +1,12 @@
 Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
+include ntp
+include dnsmasq
+
+if $::puppetversion >= '3.6.1' {
+  Package {
+    allow_virtual => true,
+  }
+}
 
 # fix dnsmasq, which looks for /bin/test
 file { '/bin/test':
@@ -6,22 +14,24 @@ file { '/bin/test':
    target => '/usr/bin/test',
 }
 
-#import "classes/*"
+dnsmasq::dnsserver { 'forward-zone-consul':
+     domain => "consul",
+     ip     => "127.0.0.1",
+     port   => "8600",
+}
 
-node default {
-
-	class { 'resolv_conf':
-		nameservers => ['127.0.0.1','192.168.20.1'],
-	}
+class { 'resolv_conf':
+	nameservers => ['127.0.0.1','192.168.20.1'],
+}
 	
-#	class { 'consul_client': 
-#		service_name => hiera('svc_name'),
-#		health_path  => '/vagrant/demo/health.py',
-#	}
+#class { 'consul_client': 
+#	service_name => hiera('svc_name'),
+#	health_path  => '/vagrant/demo/health.py',
+#}
 
-	class { 'consul':
-		# join_cluster => hiera('join_addr'),
-		config_hash => {
+class { 'consul':
+	# join_cluster => hiera('join_addr'),
+	config_hash => {
 		'datacenter' => 'dc1',
 		'data_dir'   => '/opt/consul',
 		'log_level'  => 'INFO',
@@ -30,41 +40,20 @@ node default {
 		'server'     => false,
 		'recursor'   => '8.8.8.8',
 		'start_join' => [hiera('join_addr')],
-		}
 	}
-
-#        package{"dnsmasq": ensure => installed,}
-#
-#        file{"/etc/dnsmasq.d/10-consul":
-#           ensure =>  'present',
-#           content => 'server=/consul/127.0.0.1#8600',
-#           notify  => Service['dnsmasq'],
-#           require => Package['dnsmasq'],
-#        }
-#
-#        service{'dnsmasq': ensure => running, }
-
-
-        include dnsmasq
-	
-       dnsmasq::dnsserver { 'forward-zone-consul':
-	     domain => "consul",
-	     ip     => "127.0.0.1",
-	     port   => "8600",
-       }
-
-#	consul::service { $service_name:
-#		tags           => ['actuator'],
-#		port           => 8080,
-#		check_script   => $health_path,
-#		check_interval => '5s',
-#	}
-
 }
 
-if $::puppetversion >= '3.6.1' {
-  Package {
-    allow_virtual => true,
-  }
+#consul::service { $service_name:
+#	tags           => ['actuator'],
+#	port           => 8080,
+#	check_script   => $health_path,
+#	check_interval => '5s',
+#}
+
+class { 'ambari_agent':
+        repo => "http://public-repo-1.hortonworks.com/ambari/centos6/1.x/updates/1.7.0/ambari.repo",
+        serverhostname => $::hostname,
 }
+
+Class['dnsmasq'] -> Class['ntp'] -> Class['resolv_conf'] -> Class['consul'] -> Class['ambari_agent']
 
