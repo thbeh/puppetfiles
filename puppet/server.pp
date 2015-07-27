@@ -48,5 +48,5 @@ class { 'ambari_agent':
 	serverhostname => $::hostname,
 }
 
-Class['dnsmasq'] -> Class['ntp'] -> Class['resolv_conf'] -> Class['consul'] -> Class['ambari-server'] -> Class['ambari_agent']
+Class['dnsmasq'] -> Class['ntp'] -> Class['resolv_conf'] -> Class['consul'] -> Class['ambari_server'] -> Class['ambari_agent']
 
