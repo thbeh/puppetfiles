@@ -8,9 +8,9 @@ if $::puppetversion >= '3.6.1' {
   }
 }
 
-host { $::fqdn:
-	ip => $::ipaddress_eth1,
-}
+#host { $::fqdn:
+#	ip => $::ipaddress_eth1,
+#}
 
 # fix dnsmasq, which looks for /bin/test
 file { '/bin/test':
