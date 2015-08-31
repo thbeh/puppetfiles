@@ -39,3 +39,14 @@ class { 'consul':
 	}
 }
 
+class { 'ambari_server':
+	repo => "http://public-repo-1.hortonworks.com/ambari/centos6/1.x/updates/1.7.0/ambari.repo",
+}
+
+class { 'ambari_agent':
+	repo => "http://public-repo-1.hortonworks.com/ambari/centos6/1.x/updates/1.7.0/ambari.repo",
+	serverhostname => $::hostname,
+}
+
+Class['dnsmasq'] -> Class['ntp'] -> Class['resolv_conf'] -> Class['consul'] -> Class['ambari_server'] -> Class['ambari_agent']
+
